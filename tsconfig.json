@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "/*": ["*"]
+    },
+    "types": ["node", "meteor", "react", "react-dom"]
+  },
+  "include": ["client/**/*", "server/**/*", "imports/**/*"],
+  "exclude": ["node_modules"]
+}
