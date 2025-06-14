@@ -1,37 +1,13 @@
 import { Meteor } from "meteor/meteor";
-import { LinksCollection } from "../imports/api/links";
+import { RoomsCollection } from "/imports/api/RoomsCollection";
+import "../imports/api/RoomsPublication";
 
-async function insertLink({ title, url }: { title: string; url: string }) {
-  await LinksCollection.insertAsync({ title, url, createdAt: new Date() });
-}
+const insertRoom = (roomTitle: string) => {
+  RoomsCollection.insertAsync({ title: roomTitle, canvasActive: false });
+};
 
 Meteor.startup(async () => {
-  // If the Links collection is empty, add some data.
-  if ((await LinksCollection.find().countAsync()) === 0) {
-    await insertLink({
-      title: "Do the Tutorial",
-      url: "https://www.meteor.com/tutorials/react/creating-an-app",
-    });
-
-    await insertLink({
-      title: "Follow the Guide",
-      url: "https://guide.meteor.com",
-    });
-
-    await insertLink({
-      title: "Read the Docs",
-      url: "https://docs.meteor.com",
-    });
-
-    await insertLink({
-      title: "Discussions",
-      url: "https://forums.meteor.com",
-    });
+  if ((await RoomsCollection.find().countAsync()) === 0) {
+    ["Room 1", "Room 2", "Room 3"].forEach((el) => insertRoom(el));
   }
-
-  // We publish the entire Links collection to all clients.
-  // In order to be fetched in real-time to the clients
-  Meteor.publish("links", function () {
-    return LinksCollection.find();
-  });
 });
