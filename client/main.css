@@ -15,6 +15,7 @@ li {
 canvas {
   border: 1px solid #333;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .controls {

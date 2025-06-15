@@ -59,6 +59,7 @@ const Canvas = () => {
     }, [sectors, gridSize]);
 
     const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
+        e.preventDefault()
         const canvas = canvasRef.current;
         if (!canvas) return;
 
