@@ -1,6 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import { RoomsCollection } from "/imports/api/RoomsCollection";
 import "../imports/api/RoomsPublication";
+import "../imports/api/roomsMethods";
 
 const insertRoom = (roomTitle: string) => {
   RoomsCollection.insertAsync({ title: roomTitle, canvasActive: false });
