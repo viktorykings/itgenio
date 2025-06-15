@@ -2,3 +2,50 @@ body {
   padding: 10px;
   font-family: sans-serif;
 }
+li {
+  list-style: none;
+}
+.canvas-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+canvas {
+  border: 1px solid #333;
+  cursor: pointer;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 8px 16px;
+  background: #e97c7c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.rooms-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30;
+  width: 300px;
+}
+.room {
+  display: flex;
+  gap: 50px;
+  padding: 20px 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+.room-active {
+  background-color: #ebffeb;
+  color: #35bb39;
+  font-weight: bold;
+}

@@ -1,10 +1,4 @@
 import { Mongo } from "meteor/mongo";
+import { Room } from "../types.ts/TRoom";
 
 export const RoomsCollection = new Mongo.Collection<Room>("rooms");
-
-export interface Room {
-  _id: string;
-  title: string;
-  canvasActive: boolean;
-  //   createdAt: Date;
-}

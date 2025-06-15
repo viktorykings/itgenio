@@ -1,20 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTracker, useSubscribe } from 'meteor/react-meteor-data';
-import Canvas from './Canvas';
 import { RoomsCollection } from '../api/RoomsCollection';
-import Room from './Room';
-// import { TaskCollection } from '../api/TaskCollection';
+import RoomsList from './rooms/RoomsList';
+import { Room } from '../types.ts/TRoom';
+import Canvas from './Canvas';
 
 const App = () => {
-  // const tasks = useTracker(() => TaskCollection.find({}).fetch());
+  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const isLoading = useSubscribe('rooms')
   const rooms = useTracker(() => RoomsCollection.find({}).fetch())
   console.log(rooms)
 
   if (isLoading()) return <p>loading...</p>
   return (
-    <div>
-      {rooms.map(room => <Room key={room._id} room={room} />)}
+    <div className="room-page">
+      <div className="room-list-container">
+        <RoomsList
+          rooms={rooms}
+          selectedRoom={selectedRoom}
+          onSelectRoom={setSelectedRoom}
+        />
+      </div>
+
+      <div className="room-canvas-container">
+        {selectedRoom ? (
+          <Canvas
+          // room={selectedRoom}
+          />
+        ) : (
+          <div className="no-room-selected">
+            <p>Выберите чат для начала общения</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
