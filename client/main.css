@@ -23,19 +23,48 @@ canvas {
 }
 
 button {
-  padding: 8px 16px;
-  background: #e97c7c;
+  padding: 5px 10px;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
+.delete-btn {
+  background: #e97c7c;
+}
+.submit-btn {
+  padding: 10px 20px;
+  align-self: flex-end;
+  background: #35bb39;
+}
+.room-list-container {
+  width: 400px;
+}
+.form {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
 
+.form-label {
+  display: block;
+}
+.form-input {
+  display: flex;
+  font-size: 20px;
+  padding: 5px 15px 5px 0px;
+  border: none;
+  border-bottom: 3px solid #7f7f7f;
+}
+.form-input:focus {
+  border: none;
+  border-bottom: 3px solid #35bb39;
+  outline: none;
+}
 .rooms-list {
   display: flex;
   flex-direction: column;
   gap: 30;
-  width: 300px;
 }
 .room {
   display: flex;

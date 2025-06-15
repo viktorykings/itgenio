@@ -3,7 +3,8 @@ import { useTracker, useSubscribe } from 'meteor/react-meteor-data';
 import { RoomsCollection } from '../api/RoomsCollection';
 import RoomsList from './rooms/RoomsList';
 import { Room } from '../types.ts/TRoom';
-import Canvas from './Canvas';
+import Canvas from './canvas/Canvas';
+import Form from './Form';
 
 const App = () => {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
@@ -15,6 +16,7 @@ const App = () => {
   return (
     <div className="room-page">
       <div className="room-list-container">
+        <Form />
         <RoomsList
           rooms={rooms}
           selectedRoom={selectedRoom}
@@ -29,7 +31,7 @@ const App = () => {
           />
         ) : (
           <div className="no-room-selected">
-            <p>Выберите чат для начала общения</p>
+            <p>Выберите комнату</p>
           </div>
         )}
       </div>
