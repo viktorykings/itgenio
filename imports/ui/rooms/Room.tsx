@@ -3,7 +3,11 @@ import { RoomProp } from '../../types.ts/TRoom'
 
 const Room = ({ room, selectedRoom, onSelectRoom }: RoomProp) => {
     const handleDelete = async () => {
-        await Meteor.callAsync("rooms.delete", { _id: room._id });
+        try {
+            await Meteor.callAsync("rooms.delete", { _id: room._id });
+        } catch (err) {
+            console.error('Failed to delete room:', err)
+        }
     }
     return (
         <div className={room._id === selectedRoom?._id ? 'room room-active' : 'room'}>

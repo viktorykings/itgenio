@@ -30,6 +30,9 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
+button:disabled {
+  background-color: #dfdfdf;
+}
 .delete-btn {
   background: #e97c7c;
 }
