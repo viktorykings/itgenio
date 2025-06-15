@@ -1,8 +1,8 @@
 export interface Room {
   _id: string;
   title: string;
-  canvasActive: boolean;
-  //   createdAt: Date;
+  canvasData: string;
+  createdAt: Date;
 }
 
 export interface RoomListProps {
@@ -14,3 +14,7 @@ export interface RoomListProps {
 export type RoomProp = Pick<RoomListProps, "onSelectRoom" | "selectedRoom"> & {
   room: Room;
 };
+
+export interface CanvasProp {
+  room: Room;
+}

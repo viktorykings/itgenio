@@ -27,7 +27,7 @@ const App = () => {
       <div className="room-canvas-container">
         {selectedRoom ? (
           <Canvas
-          // room={selectedRoom}
+            room={selectedRoom}
           />
         ) : (
           <div className="no-room-selected">

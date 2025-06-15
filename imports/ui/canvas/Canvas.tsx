@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { CanvasProp } from '/imports/types.ts/TRoom';
 
 interface Sector {
     x: number;
@@ -7,25 +8,32 @@ interface Sector {
     active: boolean;
 }
 
-const Canvas = () => {
+const Canvas = ({ room }: CanvasProp) => {
+    const { _id, canvasData } = room
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [sectors, setSectors] = useState<Sector[]>([]);
     const [gridSize] = useState({ rows: 10, cols: 10 });
 
     useEffect(() => {
-        const newSectors: Sector[] = [];
-        for (let y = 0; y < gridSize.rows; y++) {
-            for (let x = 0; x < gridSize.cols; x++) {
-                newSectors.push({
-                    x,
-                    y,
-                    color: '#fff',
-                    active: false
-                });
+        if (canvasData) {
+            setSectors(JSON.parse(canvasData));
+        } else {
+            const newSectors: Sector[] = [];
+
+            for (let y = 0; y < gridSize.rows; y++) {
+                for (let x = 0; x < gridSize.cols; x++) {
+                    newSectors.push({
+                        x,
+                        y,
+                        color: '#fff',
+                        active: false
+                    });
+                }
             }
+            setSectors(newSectors);
         }
-        setSectors(newSectors);
-    }, [gridSize]);
+    }, [gridSize, _id]);
+
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -56,6 +64,11 @@ const Canvas = () => {
                 sectorHeight
             );
         });
+        const newData = JSON.stringify(sectors)
+
+        Meteor.call('rooms.updateCanvas', _id, newData, (error: any) => {
+            if (error) console.error('Error saving canvas:', error);
+        });
     }, [sectors, gridSize]);
 
     const handleCanvasClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -79,6 +92,7 @@ const Canvas = () => {
             }
             return sector;
         }));
+
     };
 
     return (

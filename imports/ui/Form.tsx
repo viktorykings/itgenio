@@ -10,6 +10,7 @@ const Form = () => {
 
         await Meteor.callAsync("rooms.insert", {
             title: text.trim(),
+            canvasData: '',
             createdAt: new Date(),
         });
 
