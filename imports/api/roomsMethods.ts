@@ -11,4 +11,7 @@ Meteor.methods({
       $set: { canvasData },
     });
   },
+  "rooms.delete"(_id) {
+    return RoomsCollection.removeAsync(_id);
+  },
 });
