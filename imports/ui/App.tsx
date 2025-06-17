@@ -10,7 +10,11 @@ const App = () => {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const isLoading = useSubscribe('rooms')
   const rooms = useTracker(() => RoomsCollection.find({}).fetch())
-  console.log(rooms)
+
+  const currentRoom = useTracker(() => {
+    if (!selectedRoom) return null;
+    return RoomsCollection.findOne(selectedRoom._id);
+  });
 
   if (isLoading()) return <p>loading...</p>
   return (
@@ -25,9 +29,9 @@ const App = () => {
       </div>
 
       <div className="room-canvas-container">
-        {selectedRoom ? (
+        {currentRoom ? (
           <Canvas
-            room={selectedRoom}
+            room={currentRoom}
           />
         ) : (
           <div className="no-room-selected">
