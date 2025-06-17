@@ -81,6 +81,7 @@ button:disabled {
   padding: 20px 10px;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 }
 .room-active {
   background-color: #ebffeb;

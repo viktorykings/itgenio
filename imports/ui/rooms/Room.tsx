@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { RoomProp } from '../../types.ts/TRoom'
 
 const Room = ({ room, selectedRoom, onSelectRoom }: RoomProp) => {
-    const handleDelete = async () => {
+    const handleDelete = async (e: React.MouseEvent) => {
+        e.stopPropagation()
         try {
             await Meteor.callAsync("rooms.delete", { _id: room._id });
         } catch (err) {
@@ -10,8 +11,8 @@ const Room = ({ room, selectedRoom, onSelectRoom }: RoomProp) => {
         }
     }
     return (
-        <div className={room._id === selectedRoom?._id ? 'room room-active' : 'room'}>
-            <li onClick={() => onSelectRoom(room)}>{room.title}</li>
+        <div className={room._id === selectedRoom?._id ? 'room room-active' : 'room'} onClick={() => onSelectRoom(room)}>
+            <li>{room.title}</li>
             <button className='delete-btn' onClick={handleDelete}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
